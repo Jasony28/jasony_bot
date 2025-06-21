@@ -1,0 +1,14 @@
+{
+  "name": "jasony_bot",
+  "version": "1.0.0",
+  "description": "Bot Discord TCG connecté à Firebase",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.0.0",
+    "dotenv": "^16.0.0",
+    "firebase-admin": "^11.0.0"
+  }
+}
