@@ -21,6 +21,10 @@ const client = new Client({
     GatewayIntentBits.MessageContent
   ]
 });
+const firebaseKey = JSON.parse(process.env.FIREBASE_KEY_JSON);
+admin.initializeApp({
+  credential: admin.credential.cert(firebaseKey)
+});
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
