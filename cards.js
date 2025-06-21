@@ -1,5 +1,4 @@
-// Fichier: cards.js (Version finale corrigée)
-export const allCards = [
+const allCards = [
   { id: 'C01', name: 'Discord', rarity: 'Commune', image: 'assets/cards/discord01.png' }, { id: 'C02', name: 'Minecraft', rarity: 'Commune', image: 'assets/cards/minecraft08.png' },
   { id: 'C03', name: 'Le Daron', rarity: 'Commune', image: 'assets/cards/daron09.png' }, { id: 'C04', name: 'Le Farmeur', rarity: 'Commune', image: 'assets/cards/farmer12.png' },
   { id: 'C05', name: 'Le Joueur de WoW', rarity: 'Commune', image: 'assets/cards/wow13.png' }, { id: 'C06', name: 'Le Codeur', rarity: 'Commune', image: 'assets/cards/codeur10.png' },
@@ -18,3 +17,5 @@ export const allCards = [
   { id: 'L05', name: 'Tom', rarity: 'Légendaire', image: 'assets/cards/tom.png' }, { id: 'L06', name: 'David', rarity: 'Légendaire', image: 'assets/cards/david.png' },
   { id: 'L07', name: 'Nicolas', rarity: 'Légendaire', image: 'assets/cards/nico.png' }
 ];
+
+module.exports = { allCards };
