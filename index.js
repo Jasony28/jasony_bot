@@ -3,18 +3,17 @@ const fs = require('fs');
 const path = require('path');
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const admin = require('firebase-admin');
+const { allCards } = require('./cards.js'); // <--- import local de tes cartes
 
-// 🔐 Lire la variable d'environnement contenant la clé Firebase
+// Clé Firebase depuis Render
 const firebaseConfig = JSON.parse(process.env.FIREBASE_KEY_JSON);
 
-// 🔐 Initialiser Firebase Admin SDK
 admin.initializeApp({
   credential: admin.credential.cert(firebaseConfig)
 });
 
 const db = admin.firestore();
 
-// ✅ Initialiser le bot Discord
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -49,8 +48,15 @@ async function checkForNewCards(force = false, overrideChannel = null) {
     const channel = overrideChannel || await client.channels.fetch(process.env.DISCORD_CHANNEL_ID);
 
     if (newCards.length > 0) {
-      for (const card of newCards) {
-        channel.send(`🆕 Nouvelle carte en vente : **${card.name || 'Nom inconnu'}** pour ${card.price || '??'} pièces 💰`);
+      for (const auction of newCards) {
+        // Cherche la carte dans allCards.js
+        let cardName = auction.cardId || "Carte inconnue";
+        const card = allCards.find(c => c.id === auction.cardId);
+        if (card) {
+          cardName = card.name;
+        }
+        const price = auction.startPrice || auction.currentPrice || '??';
+        channel.send(`🆕 Nouvelle carte en vente : **${cardName}** pour ${price} pièces 💰`);
       }
     } else if (force) {
       channel.send("🔎 Aucune nouvelle carte détectée.");
@@ -84,3 +90,4 @@ client.on('messageCreate', async message => {
 });
 
 client.login(process.env.DISCORD_TOKEN);
+
