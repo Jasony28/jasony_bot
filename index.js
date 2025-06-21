@@ -14,16 +14,13 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
+// ✅ Initialiser le bot Discord
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent
   ]
-});
-const firebaseKey = JSON.parse(process.env.FIREBASE_KEY_JSON);
-admin.initializeApp({
-  credential: admin.credential.cert(firebaseKey)
 });
 
 client.commands = new Collection();
